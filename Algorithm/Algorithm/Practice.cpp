@@ -14,26 +14,50 @@ void checkProcessTime() {
 	printf("\n걸린시간은 %f입니다.\n", processTime);
 }
 
+void findMaxAlphabet(int *alphabetNum, char *str) {
+	int max = 0;
+	int findIndex = 0;
+
+	char alphabetStr[26] = { 'A','B', 'C', 'D', 'E', 'F', 'G', 'H',
+		'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+		'T', 'U','V', 'W', 'X', 'Y', 'Z' };
+
+	for (int i = 0; i < 26; i++) {
+		if (max < alphabetNum[i]){
+			max = alphabetNum[i];
+			findIndex = i;
+		}
+
+		else if (max == alphabetNum[i] && i != 0){
+			findIndex = -1;
+		}
+	}
+	if(findIndex != -1)
+		printf("%c\n", alphabetStr[findIndex]);
+	else
+		printf("?\n");
+
+}
+
 int main() {
 	before = clock();
 
-	int alphabet[26];
-	for (int i = 0; i < 26; i++)
-		alphabet[i] = -1;
-
-	char str[100];
+	int alphabetNum[26] = { 0 };
+	char str[1000000];
 
 	fgets(str, sizeof(str), stdin);
-	//str[strlen(str) - 1] = '\0';
+	str[strlen(str) - 1] = '\0';
+	int len = strlen(str);
 
-	for (int i = 0; i < strlen(str); i++) {
-		if(alphabet[str[i] - 97] == -1)
-			alphabet[str[i] - 97] = i ;
+	for (int i = 0; i < len; i++) {
+		if ('A' <= str[i] && str[i] <= 'Z')
+			alphabetNum[str[i] - 65] ++;
+		else
+			alphabetNum[str[i] - 97] ++;
 	}
 
-	for (int i = 0; i < 26; i++) {
-		printf("%d\n",alphabet[i]);
-	}
+	findMaxAlphabet(alphabetNum,str);
+
 	checkProcessTime();
 	return 0;
 }

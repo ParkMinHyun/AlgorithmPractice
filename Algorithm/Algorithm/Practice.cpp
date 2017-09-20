@@ -9,43 +9,16 @@ int main() {
 	double result;
 	before = clock();
 
-	int arr[10][10];
-	int num;
-	int i, j;
-	scanf("%d", &num);
+	int n,sum=0;
+	char arr[101];
 
-	for (i = 0; i<num; i++)
-	{
-		for (j = 0; j<num; j++)
-		{
-			scanf("%d", &arr[i][j]);
-		}
+	scanf("%d", &n);
+	scanf("%s", arr);
+
+	for (int i = 0; i < n; i++) {
+		sum += arr[i] - 48;
 	}
-
-	int temp;
-	for (i = 0; i<num; i++)
-	{
-		for (j = i + 1; j<num; j++)
-		{
-			temp = arr[i][j];
-			arr[i][j] = arr[j][i];
-			arr[j][i] = temp;
-		}
-	}
-
-	for (i = 0; i<num; i++)
-	{
-		for (j = 0; j<num; j++)
-		{
-			if (j == num - 1)
-				printf("%d", arr[i][j]);
-			else
-				printf("%d ", arr[i][j]);
-		}
-		if (i != num - 1)
-			printf("\n");
-	}
-
+	printf("%d", sum);
 
 	/*Timer Ãâ·Â*/
 	result = (double)(clock() - before) / CLOCKS_PER_SEC;

@@ -9,17 +9,24 @@ int main() {
 	double result;
 	before = clock();
 
-	int sum=0;
-	char arr[101];
-	
-	scanf("%s", arr);
+	int number;
+	int count = 0;
+	int A, B, C, Add;
+	scanf("%d", &number);
+	Add = number;
 
-	for (int i = 0; i < strlen(arr); i++) {
-		if(i%10==0)
-			printf("\n%c", arr[i]);
-		else
-			printf("%c", arr[i]);
+	while (Add != number || count == 0) {
+		A = Add / 10;
+		B = Add % 10;
+		C = (A + B) % 10;
+		A = B; B = C;
+		Add = A * 10 + B;
+		count++;
 	}
+
+	printf("%d\n", count);
+
+
 
 	/*Timer Ãâ·Â*/
 	result = (double)(clock() - before) / CLOCKS_PER_SEC;

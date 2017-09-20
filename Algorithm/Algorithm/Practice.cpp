@@ -17,30 +17,28 @@ void checkProcessTime() {
 int main() {
 	before = clock();
 
-	int num, cnt, sum = 0;
-	char checkOX[80];
-
+	int num,temp = 0;
+	char arr[80];
 
 	scanf("%d", &num);
 	for (int i = 0; i < num; i++) {
-		scanf("%s", checkOX);
-		sum = 0;
-		cnt = 0;
-		for (int j = 0; j < strlen(checkOX); j++) {
-			
-			if (checkOX[j] == 'O'){
-				cnt++;
-				sum += cnt;
-			}
-			else{
-				cnt = 0;
-			}
-
-		}
-		printf("%d\n", sum);
-		memset(checkOX, '\0', 80);
+		scanf("%d", &arr[i]);
 	}
 
+	for (int i = 0; i < num; i++) {
+		for (int j = i + 1; j < num; j++) {
+			if (arr[i] < arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+
+	for (int i = 0; i < num; i++) {
+		printf("%d ", arr[i]);
+	}
 	checkProcessTime();
 	return 0;
 }

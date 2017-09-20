@@ -2,6 +2,30 @@
 #include <time.h>
 #include <string.h>
 #pragma warning(disable:4996)
+
+int d[10001];
+int dn(int i) {
+
+	int res = i;
+	if (i >= 10000) {
+		res += i / 10000;
+		i %= 10000;
+	}
+	if (i >= 1000) {
+		res += i / 1000;
+		i %= 1000;
+	}
+	if (i >= 100) {
+		res += i / 100;
+		i %= 100;
+	}
+	if (i >= 10) {
+		res += i /10;
+		i %= 10;
+	}
+	return res += i;
+
+}
 int main() {
 
 	/*Timer 변수 선언*/
@@ -9,31 +33,11 @@ int main() {
 	double processTime;
 	before = clock();
 
-	int middleResult = 0;
-	int result, sum, cnt = 0;
-
 	for (int i = 1; i <= 10000; i++) {
-		cnt = 0;
-		for (int j = 1; j <= i; j++)
-		{
-			sum = j;
-			middleResult = j;
-
-			while (middleResult>0) {
-				sum += middleResult % 10;
-				middleResult = middleResult / 10;
-			}
-			if (sum == i){
-				cnt++;
-				break;
-			}
-		}
-		if(cnt == 0)
+		d[dn(i)] = 1;
+		if (!d[i])
 			printf("%d\n", i);
 	}
-	
-
-
 
 	/*Timer 출력*/
 	processTime = (double)(clock() - before) / CLOCKS_PER_SEC;

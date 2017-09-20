@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-
+#include <string.h>
 #pragma warning(disable:4996)
 int main() {
 
@@ -9,16 +9,17 @@ int main() {
 	double result;
 	before = clock();
 
-	int n,sum=0;
+	int sum=0;
 	char arr[101];
-
-	scanf("%d", &n);
+	
 	scanf("%s", arr);
 
-	for (int i = 0; i < n; i++) {
-		sum += arr[i] - 48;
+	for (int i = 0; i < strlen(arr); i++) {
+		if(i%10==0)
+			printf("\n%c", arr[i]);
+		else
+			printf("%c", arr[i]);
 	}
-	printf("%d", sum);
 
 	/*Timer Ãâ·Â*/
 	result = (double)(clock() - before) / CLOCKS_PER_SEC;

@@ -1,3 +1,4 @@
 ﻿  Practice.cpp
+c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.exe
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.pdb (Partial PDB)

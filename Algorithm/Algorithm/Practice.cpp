@@ -17,27 +17,22 @@ void checkProcessTime() {
 int main() {
 	before = clock();
 
-	int num,temp = 0;
-	char arr[80];
+	int alphabet[26];
+	for (int i = 0; i < 26; i++)
+		alphabet[i] = -1;
 
-	scanf("%d", &num);
-	for (int i = 0; i < num; i++) {
-		scanf("%d", &arr[i]);
+	char str[100];
+
+	fgets(str, sizeof(str), stdin);
+	//str[strlen(str) - 1] = '\0';
+
+	for (int i = 0; i < strlen(str); i++) {
+		if(alphabet[str[i] - 97] == -1)
+			alphabet[str[i] - 97] = i ;
 	}
 
-	for (int i = 0; i < num; i++) {
-		for (int j = i + 1; j < num; j++) {
-			if (arr[i] < arr[j])
-			{
-				temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
-			}
-		}
-	}
-
-	for (int i = 0; i < num; i++) {
-		printf("%d ", arr[i]);
+	for (int i = 0; i < 26; i++) {
+		printf("%d\n",alphabet[i]);
 	}
 	checkProcessTime();
 	return 0;

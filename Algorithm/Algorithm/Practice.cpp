@@ -1,63 +1,40 @@
 #include <stdio.h>
-#include <time.h>
 #include <string.h>
-#include <math.h>
-#pragma warning(disable:4996)
-
-/*Timer 변수 선언*/
-clock_t before;
-double processTime;
-
-void checkProcessTime() {
-	/*Timer 출력*/
-	processTime = (double)(clock() - before) / CLOCKS_PER_SEC;
-	printf("\n걸린시간은 %f입니다.\n", processTime);
-}
-
-void findMaxAlphabet(int *alphabetNum, char *str) {
-	int max = 0;
-	int findIndex = 0;
-
-	char alphabetStr[26] = { 'A','B', 'C', 'D', 'E', 'F', 'G', 'H',
-		'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-		'T', 'U','V', 'W', 'X', 'Y', 'Z' };
-
-	for (int i = 0; i < 26; i++) {
-		if (max < alphabetNum[i]){
-			max = alphabetNum[i];
-			findIndex = i;
-		}
-
-		else if (max == alphabetNum[i] && i != 0){
-			findIndex = -1;
-		}
-	}
-	if(findIndex != -1)
-		printf("%c\n", alphabetStr[findIndex]);
-	else
-		printf("?\n");
-
-}
-
 int main() {
-	before = clock();
 
-	int alphabetNum[26] = { 0 };
-	char str[1000000];
+	int num, len;
+	char str[81];
+	scanf("%d ", &num);
+	for (int i = 0; i < num; i++) {
+		scanf("%s", str);
+		len = strlen(str);
 
-	fgets(str, sizeof(str), stdin);
-	str[strlen(str) - 1] = '\0';
-	int len = strlen(str);
-
-	for (int i = 0; i < len; i++) {
-		if ('A' <= str[i] && str[i] <= 'Z')
-			alphabetNum[str[i] - 65] ++;
-		else
-			alphabetNum[str[i] - 97] ++;
+		for (int j = 0; j < len; ) {
+			if (str[j] == '%' && str[j + 1] == '2')
+			{
+				switch (str[j + 2])
+				{
+				case '0': printf(" "); break;
+				case '1': printf("!"); break;
+				case '4': printf("$"); break;
+				case '5': printf("%c",37); break;
+				case '8': printf("("); break;
+				case '9': printf(")"); break;
+				case 'a': printf("*"); break;
+				default: printf("%c%c", str[j], str[j + 1]); --j; break;
+				}
+				j += 3;
+			}
+			else{
+				printf("%c", str[j]);
+				j++;
+				if (j == len - 2) {
+					printf("%c%c", str[j], str[j + 1]);
+					break;
+				}
+			}
+		}
+		printf("\n");
 	}
-
-	findMaxAlphabet(alphabetNum,str);
-
-	checkProcessTime();
 	return 0;
 }

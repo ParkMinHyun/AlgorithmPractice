@@ -5,7 +5,7 @@
 
 int main() {
 
-	char str[1000000];
+	char str[101];
 	int len,sum=0, flag = 0, num;
 
 	scanf("%d ", &num);
@@ -15,14 +15,16 @@ int main() {
 		flag = 0;
 
 		for (int i = 0; i < len; i++) {
+			if (flag == 1)
+				break;
+
 			for(int j=0; j<i; j++)
 				if (str[i] != str[i - 1] && str[j] == str[i]) {
 					flag = 1;
+					sum++;
 					break;
 				}
 		}
-		if (flag == 1)
-			sum++;
 	}
 
 	printf("%d\n",num-sum);

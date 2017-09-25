@@ -1,27 +1,34 @@
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+#include <cstdio>
+#include <string>
 
-#pragma warning(disable:4996);
+using namespace std;
 
-int main() {
+string str;
+int main()
+{
+	cin >> str;
+	int pos = 0;
 
-	char str[101];
-	int len,sum=0, flag = 0, num;
+	string croatia[8] = { "c=","c-","dz=","d-","lj","nj","s=","z=" };
+	string del;
+	string star = "*";
 
-	scanf("%d ", &num);
-	for (int i = 0; i < num; i++) {
-		scanf("%s", str);
-		int a[26] = { 0 };
+	for (int i = 0; i < 8; i++)
+	{
+		del = croatia[i];
 
-		for (int i = 0; str[i]; i++) {
-			a[str[i] - 97] = 1;
-			if (str[i] != str[i + 1] && a[str[i+1] - 'a'] == 1) {
-				sum++;
-				break;
+		if (str.find(del) != string::npos)
+		{
+			while ((pos = str.find(del)) != string::npos)
+			{
+				str.erase(pos, del.length());
+				str.insert(pos, star);
 			}
 		}
 	}
 
-	printf("%d\n",num-sum);
+	cout << str.size() << endl;
+
 	return 0;
 }

@@ -1,7 +1,4 @@
 ﻿  Practice.cpp
 c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(4): warning C4081: 'newline'이(가) 있어야 하는데 ';'이(가) 있습니다.
-c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(45): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(67): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(76): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.exe
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.pdb (Partial PDB)

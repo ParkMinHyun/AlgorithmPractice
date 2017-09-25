@@ -3,49 +3,28 @@
 
 #pragma warning(disable:4996);
 
-int alphabet[26] = { 0 };
-
-void bubbleSort(int *alphabet) {
-
-	int temp;
-	for (int i = 0; i < 26; i++) {
-		for (int j = 0; j <  26 - (i + 1); j++) {
-			if (alphabet[j] < alphabet[j+1])
-			{
-				temp = alphabet[j+1];
-				alphabet[j+1] = alphabet[j];
-				alphabet[j] = temp;
-			}
-		}
-	}
-}
-
 int main() {
 
 	char str[1000000];
-	int len, flag = 0, max = 0;
-	char maxValue;
+	int len,sum=0, flag = 0, num;
 
-	scanf("%s", str);
-	len = strlen(str);
+	scanf("%d ", &num);
+	for (int i = 0; i < num; i++) {
+		scanf("%s", str);
+		len = strlen(str);
+		flag = 0;
 
-	for (int i = 0; i < len; i++)
-	{
-		if ('a' <= str[i] && str[i] <= 'z') 
-			str[i] = str[i] - 32;
-		alphabet[str[i]-65] ++;
-
-		if (max < alphabet[str[i] - 65]){
-			max = alphabet[str[i] - 65];
-			maxValue = str[i];
+		for (int i = 0; i < len; i++) {
+			for(int j=0; j<i; j++)
+				if (str[i] != str[i - 1] && str[j] == str[i]) {
+					flag = 1;
+					break;
+				}
 		}
+		if (flag == 1)
+			sum++;
 	}
 
-	bubbleSort(alphabet);
-
-	if (alphabet[0] == alphabet[1])
-		printf("?\n");
-	else
-		printf("%c\n", maxValue );
-
+	printf("%d\n",num-sum);
+	return 0;
 }

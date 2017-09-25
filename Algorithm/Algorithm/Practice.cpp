@@ -11,19 +11,14 @@ int main() {
 	scanf("%d ", &num);
 	for (int i = 0; i < num; i++) {
 		scanf("%s", str);
-		len = strlen(str);
-		flag = 0;
+		int a[26] = { 0 };
 
-		for (int i = 0; i < len; i++) {
-			if (flag == 1)
+		for (int i = 0; str[i]; i++) {
+			a[str[i] - 97] = 1;
+			if (str[i] != str[i + 1] && a[str[i+1] - 'a'] == 1) {
+				sum++;
 				break;
-
-			for(int j=0; j<i; j++)
-				if (str[i] != str[i - 1] && str[j] == str[i]) {
-					flag = 1;
-					sum++;
-					break;
-				}
+			}
 		}
 	}
 

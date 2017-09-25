@@ -3,9 +3,25 @@
 
 #pragma warning(disable:4996);
 
+int alphabet[26] = { 0 };
+
+void bubbleSort(int *alphabet) {
+
+	int temp;
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j <  26 - (i + 1); j++) {
+			if (alphabet[j] < alphabet[j+1])
+			{
+				temp = alphabet[j+1];
+				alphabet[j+1] = alphabet[j];
+				alphabet[j] = temp;
+			}
+		}
+	}
+}
+
 int main() {
 
-	int alphabet[26] = { 0 };
 	char str[1000000];
 	int len, flag = 0, max = 0;
 	char maxValue;
@@ -25,14 +41,9 @@ int main() {
 		}
 	}
 
-	for (int i = 0; i < 26; i++)
-	{
-		if ( max == alphabet[i]){
-			flag ++;
-		}
-	}
+	bubbleSort(alphabet);
 
-	if (flag > 1)
+	if (alphabet[0] == alphabet[1])
 		printf("?\n");
 	else
 		printf("%c\n", maxValue );

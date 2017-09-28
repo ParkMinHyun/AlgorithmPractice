@@ -11,42 +11,56 @@ void swap(int *a, int *b) {
 	*b = temp;
 }
 
-void merge(int arr[], int start, int mid, int end) {
-	int buf[11] = { 0 };
 
-	int i = start, j = mid+1, k = start;
-	while (i <= mid && j <= end) {
-		if (arr[i] < arr[j])
-			buf[k++] = arr[i++];
-		else
-			buf[k++] = arr[j++];
+void quickSort(int arr[], int start, int end) {
+
+	if (start >= end)
+		return;
+
+	int pivot, left, right;
+	left = start;
+	right = end;
+	pivot = arr[left];
+
+	while (start < end) {
+		while ((arr[end] >= pivot) && (start < end))
+			end--;
+
+		if (start != end)
+		{
+			arr[start] = arr[end];
+			start++;
+		}
+
+		for (int i = 0; i < 10; i++)
+			printf("%d ", arr[i]);
+		printf("\n");
+
+		while ((arr[start] <= pivot) && (start < end))
+			start++;
+
+		if (start != end)
+		{
+			arr[end] = arr[start];
+			end--;
+		}
+
+		for (int i = 0; i < 10; i++)
+			printf("%d ", arr[i]);
+		printf("\n");
+
 	}
 
-	while (i <= mid)
-		buf[k++] = arr[i++];
+	arr[end] = pivot;
+	quickSort(arr, left, start - 1);
+	quickSort(arr, end + 1, right);
 
-	while (j <= end)
-		buf[k++] = arr[j++];
-
-	for (i = start; i <= end; i++)
-		arr[i] = buf[i];
-
-}
-void mergeSort(int arr[], int start, int end) {
-
-	int mid = (start + end) / 2;
-
-	if (start < end) {
-		mergeSort(arr, start, mid);
-		mergeSort(arr, mid + 1, end);
-		merge(arr, start, mid, end);
-	}
 }
 
 int main() {
 	int arr[10] = { 11,1,6,4,55,13,24,2,31,19 };
 
-	mergeSort(arr, 0, 9);
+	quickSort(arr, 0, 9);
 
 	for (int i = 0; i < 10; i++)
 		printf("%d ", arr[i]);

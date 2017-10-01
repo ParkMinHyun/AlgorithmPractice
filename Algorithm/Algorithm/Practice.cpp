@@ -1,70 +1,81 @@
 #include<stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <math.h>
 #pragma warning(disable: 4996)
 
-void swap(int *a, int *b) {
-	int temp;
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
+int main() {
+	int num;
+	int **arr, **arr2;
+	int *inputM1, *inputM2;
 
+	scanf("%d", &num);
+	arr = (int **)malloc(sizeof(int**)*(num));
+	arr2 = (int **)malloc(sizeof(int**)*(num));
+	inputM1 = (int *)malloc(sizeof(int*)*(num));
+	inputM2 = (int *)malloc(sizeof(int*)*(num));
 
-void quickSort(int arr[], int start, int end) {
+	for (int i = 0; i < num; i++)
+		arr[i] = (int *)malloc(sizeof(int*)*(num));
+	for (int i = 0; i < num; i++)
+		arr2[i] = (int *)malloc(sizeof(int*)*(num));
 
-	if (start >= end)
-		return;
+	for (int i = 0; i < num; i++)
+		scanf("%d", &inputM1[i]);
+	for (int i = 0; i < num; i++)
+		scanf("%d", &inputM2[i]);
 
-	int pivot, left, right;
-	left = start;
-	right = end;
-	pivot = arr[left];
-
-	while (start < end) {
-		while ((arr[end] >= pivot) && (start < end))
-			end--;
-
-		if (start != end)
-		{
-			arr[start] = arr[end];
-			start++;
+	for (int i = 0; i < num; i++)
+	{
+		int square = 4;
+		for (int j = square; j >= 0; j--) {
+			int squareNum = pow(2, j);
+			if (inputM1[i] / squareNum == 1) {
+				arr[i][4 - j] = 1;
+				inputM1[i] -= squareNum;
+			}
+			else
+				arr[i][4 - j] = 0;
+			square--;
 		}
-
-		for (int i = 0; i < 10; i++)
-			printf("%d ", arr[i]);
-		printf("\n");
-
-		while ((arr[start] <= pivot) && (start < end))
-			start++;
-
-		if (start != end)
-		{
-			arr[end] = arr[start];
-			end--;
+	}
+	for (int i = 0; i < num; i++)
+	{
+		int square = 4;
+		for (int j = square; j >= 0; j--) {
+			int squareNum = pow(2, j);
+			if (inputM2[i] / squareNum == 1){
+				arr2[i][4 - j] = 1;
+				inputM2[i] -= squareNum;
+			}
+			else
+				arr2[i][4 - j] = 0;
+			square--;
 		}
-
-		for (int i = 0; i < 10; i++)
-			printf("%d ", arr[i]);
-		printf("\n");
-
 	}
 
-	arr[end] = pivot;
-	quickSort(arr, left, start - 1);
-	quickSort(arr, end + 1, right);
+	char **str;
 
-}
+	str = (char **)malloc(sizeof(char **)*num);
+	for(int i=0; i<num; i++)
+		str[i] = (char *)malloc(sizeof(char *)*num);
 
-int main() {
-	int arr[10] = { 11,1,6,4,55,13,24,2,31,19 };
+	for (int i = 0; i < num; i++)
+	{
+		for (int j = 0; j < num; j++) {
+			if (arr[i][j] == 1 || arr2[i][j] == 1)
+				str[i][j] = '#';
+			else
+				str[i][j] = ' ';
+		}
+	}
 
-	quickSort(arr, 0, 9);
-
-	for (int i = 0; i < 10; i++)
-		printf("%d ", arr[i]);
-	printf("\n");
-
+	for (int i = 0; i < num; i++)
+	{
+		for (int j = 0; j < num; j++) {
+			printf("%c ", str[i][j]);
+		}
+		printf("\n");
+	}
 	return 0;
 }

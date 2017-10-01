@@ -27,36 +27,36 @@ int main() {
 
 	for (int i = 0; i < num; i++)
 	{
-		int square = 4;
+		int square = num-1;
 		for (int j = square; j >= 0; j--) {
 			int squareNum = pow(2, j);
 			if (inputM1[i] / squareNum == 1) {
-				arr[i][4 - j] = 1;
+				arr[i][num - 1 - j] = 1;
 				inputM1[i] -= squareNum;
 			}
 			else
-				arr[i][4 - j] = 0;
+				arr[i][num - 1 - j] = 0;
 			square--;
 		}
 	}
 	for (int i = 0; i < num; i++)
 	{
-		int square = 4;
+		int square = num - 1;
 		for (int j = square; j >= 0; j--) {
 			int squareNum = pow(2, j);
 			if (inputM2[i] / squareNum == 1){
-				arr2[i][4 - j] = 1;
+				arr2[i][num - 1 - j] = 1;
 				inputM2[i] -= squareNum;
 			}
 			else
-				arr2[i][4 - j] = 0;
+				arr2[i][num - 1 - j] = 0;
 			square--;
 		}
 	}
 
 	char **str;
 
-	str = (char **)malloc(sizeof(char **)*num);
+	str = (char **)malloc(sizeof(char )*num);
 	for(int i=0; i<num; i++)
 		str[i] = (char *)malloc(sizeof(char *)*num);
 

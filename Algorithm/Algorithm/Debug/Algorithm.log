@@ -1,3 +1,4 @@
 ﻿  Practice.cpp
+c:\users\parkminhyun\documents\algorithmpractice\algorithm\algorithm\practice.cpp(15): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.exe
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm\Debug\Algorithm.pdb (Partial PDB)

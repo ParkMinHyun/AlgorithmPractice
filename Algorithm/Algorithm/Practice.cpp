@@ -1,81 +1,35 @@
 #include<stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <math.h>
 #pragma warning(disable: 4996)
 
+void lenSort(char str[][51],int size) {
+	int len1, len2;
+	char *temp;
+
+	for(int i=0; i< size-1; i++){
+		for(int j=0; j<size-1-i; j++){
+			len1 = strlen(str[j]);
+			len2 = strlen(str[j+1]);
+			if (len1 > len2 || (strcmp(str[j],str[j+1])<1 && len1==len2))
+			{
+				temp = str[j];
+				strcpy(str[j], str[j + 1]);
+				strcpy(str[j+1], temp);
+			}
+		}
+	}
+}
 int main() {
 	int num;
-	int **arr, **arr2;
-	int *inputM1, *inputM2;
+	char str[20000][51];
 
 	scanf("%d", &num);
-	arr = (int **)malloc(sizeof(int**)*(num));
-	arr2 = (int **)malloc(sizeof(int**)*(num));
-	inputM1 = (int *)malloc(sizeof(int*)*(num));
-	inputM2 = (int *)malloc(sizeof(int*)*(num));
+	for (int i = 0; i < num; i++)
+		scanf("%s", str[i]);
+
+	lenSort(str,num);
 
 	for (int i = 0; i < num; i++)
-		arr[i] = (int *)malloc(sizeof(int*)*(num));
-	for (int i = 0; i < num; i++)
-		arr2[i] = (int *)malloc(sizeof(int*)*(num));
-
-	for (int i = 0; i < num; i++)
-		scanf("%d", &inputM1[i]);
-	for (int i = 0; i < num; i++)
-		scanf("%d", &inputM2[i]);
-
-	for (int i = 0; i < num; i++)
-	{
-		int square = num-1;
-		for (int j = square; j >= 0; j--) {
-			int squareNum = pow(2, j);
-			if (inputM1[i] / squareNum == 1) {
-				arr[i][num - 1 - j] = 1;
-				inputM1[i] -= squareNum;
-			}
-			else
-				arr[i][num - 1 - j] = 0;
-			square--;
-		}
-	}
-	for (int i = 0; i < num; i++)
-	{
-		int square = num - 1;
-		for (int j = square; j >= 0; j--) {
-			int squareNum = pow(2, j);
-			if (inputM2[i] / squareNum == 1){
-				arr2[i][num - 1 - j] = 1;
-				inputM2[i] -= squareNum;
-			}
-			else
-				arr2[i][num - 1 - j] = 0;
-			square--;
-		}
-	}
-
-	char **str;
-
-	str = (char **)malloc(sizeof(char )*num);
-	for(int i=0; i<num; i++)
-		str[i] = (char *)malloc(sizeof(char *)*num);
-
-	for (int i = 0; i < num; i++)
-	{
-		for (int j = 0; j < num; j++) {
-			if (arr[i][j] == 1 || arr2[i][j] == 1)
-				str[i][j] = '#';
-			else
-				str[i][j] = ' ';
-		}
-	}
-
-	for (int i = 0; i < num; i++)
-	{
-		for (int j = 0; j < num; j++) {
-			printf("%c ", str[i][j]);
-		}
-		printf("\n");
-	}
-	return 0;
+		scanf("%s", str[i]);
 }

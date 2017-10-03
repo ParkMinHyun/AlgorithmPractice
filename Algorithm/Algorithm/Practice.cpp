@@ -3,44 +3,30 @@
 #include <stdlib.h>
 #pragma warning(disable: 4996)
 
-typedef struct WORDBOOK
-{
-	int len;
-	char word[51];
-}wordBook;
+int compareLen(const void *a, const void*b) {
+	return (strlen((char *)a) > strlen((char *)b)) ? 1 : strlen((char *)a) < strlen((char *)b) ? -1 : strcmp((char *)a, (char *)b);
+}
 
-wordBook wb[20001];
-
-void Sort(int size) {
-	int k;
-	wordBook w;
-
-	for (int i = 0; i < size - 1; i++)
-		for (int j = 0; j < size - 1 - i; j++)
-			if (wb[j].len > wb[j + 1].len ||
-				(strcmp(wb[j].word, wb[j + 1].word) == 1 && wb[j].len == wb[j + 1].len))
-			{
-				w = wb[j];
-				wb[j] = wb[j + 1];
-				wb[j + 1] = w;
-			}
+int compare(const void *a, const void*b) {
+	return strcmp((char *)a, (char *)b);
 }
 
 int main() {
 	int num;
-
+	char str[20000][51];
 	scanf("%d", &num);
 	for (int i = 0; i < num; i++) {
-		scanf("%s", wb[i].word);
-		wb[i].len = strlen(wb[i].word);
+		scanf("%s", str[i]);
 	}
 
-	Sort(num);
+	qsort(str, num, sizeof(str[0]), compareLen);
 
 	for (int j = 0; j < num; j++) {
-		if (strcmp(wb[j].word, wb[j + 1].word))
-			printf("%s\n", wb[j].word);
+		if (strcmp(str[j], str[j + 1])) {
+			printf("%s\n", str[j]);
+		}
 	}
 
+	_sleep(5000);
 	return 0;
 }

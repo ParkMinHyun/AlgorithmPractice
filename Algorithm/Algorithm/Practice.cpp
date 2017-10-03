@@ -1,67 +1,22 @@
 #include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <string.h>
+#include <stdlib.h>
 #pragma warning(disable: 4996)
 
-int stack[10000];
-int size=0;
+int main() {
+	int a, b, num;
+	bool arr[1000001] = { 1 };
 
-void push(int data) {
-	if (size > 10000)
-		return;
+	scanf("%d %d", &a, &b);
 
-	stack[size++] = data;
-}
+	for (int i = a; i <= b; i++)
+		if (i % 2 == 0 || i % 3 == 0)
+			arr[i] = 1;
 
-int pop(int data) {
-	if (size == 0)
-		return -1;
+	arr[2] = arr[3] = 0;
+	for (int i = a; i <= b; i++)
+		if (arr[i] != 1)
+			printf("%d\n", i);
 
-	return stack[--size];
-}
-
-int top() {
-	if (size == 0)
-		return -1;
-
-	return stack[size-1];
-}
-
-int empty() {
-	if (size == 0)
-		return 1;
-	else
-		return 0;
-}
-
-int sizeOfStack() {
-	return size;
-}
-
-int main(void)
-{
-	int num, data;
-	char input[10];
-	scanf("%d", &num);
-
-	for (int i = 0; i < num; i++) {
-		scanf("%s", input);
-		if (!strcmp("push", input)) {
-			scanf("%d", &data);
-			push(data);
-		}
-		else if (!strcmp("pop", input)) {
-			printf("%d\n", pop(data));
-		}
-		else if (!strcmp("top", input)) {
-			printf("%d\n", top());
-
-		}
-		else if (!strcmp("empty", input)){
-			printf("%d\n", empty());
-		}
-		else if (!strcmp("size", input)) {
-			printf("%d\n", sizeOfStack());
-		}
-	}
+	return 0;
 }

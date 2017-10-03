@@ -1,33 +1,19 @@
 #include<stdio.h>
-#include <string.h>
-#include <stdlib.h>
+
 #pragma warning(disable: 4996)
 
-int compare(const void *x, const void *y)
+int main(void)
 {
-	char *a, *b;
-	a = (char *)x;
-	b = (char *)y;
+	int mon, day, daySum = 0;
 
-	if (strlen(a) > strlen(b)) return 1;
-	else if (strlen(a) < strlen(b)) return -1;
-	else return strcmp(a,b);
-}
+	char days[7][4] = { "SUN", "MON","TUE","WED","THU", "FRI", "SAT" };
+	char monDate[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	scanf("%d %d", &mon, &day);
 
-int main() {
-	int num;
-	char str[20000][51];
-	scanf("%d", &num);
-	for (int i = 0; i < num; i++) {
-		scanf("%s", str[i]);
-	}
+	for (int i = 1; i < mon; i++)
+		daySum += monDate[i - 1];
 
-	qsort(str, num, sizeof(str[0]), compare);
+	daySum += day;
 
-	for (int j = 0; j < num; j++) {
-		if (strcmp(str[j], str[j + 1])) {
-			printf("%s\n", str[j]);
-		}
-	}
-	return 0;
+	printf("%s\n", days[daySum % 7]);
 }

@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #pragma warning(disable: 4996)
 
-int compareLen(const void *a, const void*b) {
-	return (strlen((char *)a) > strlen((char *)b)) ? 1 : strlen((char *)a) < strlen((char *)b) ? -1 : strcmp((char *)a, (char *)b);
-}
+int compare(const void *x, const void *y)
+{
+	char *a, *b;
+	a = (char *)x;
+	b = (char *)y;
 
-int compare(const void *a, const void*b) {
-	return strcmp((char *)a, (char *)b);
+	if (strlen(a) > strlen(b)) return 1;
+	else if (strlen(a) < strlen(b)) return -1;
+	else return strcmp(a,b);
 }
 
 int main() {
@@ -19,14 +22,12 @@ int main() {
 		scanf("%s", str[i]);
 	}
 
-	qsort(str, num, sizeof(str[0]), compareLen);
+	qsort(str, num, sizeof(str[0]), compare);
 
 	for (int j = 0; j < num; j++) {
 		if (strcmp(str[j], str[j + 1])) {
 			printf("%s\n", str[j]);
 		}
 	}
-
-	_sleep(5000);
 	return 0;
 }

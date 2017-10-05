@@ -2,22 +2,19 @@
 
 #pragma warning(disable: 4996)
 
-int fibo(int num) {
-	if (num == 1 || num == 0)
-		return num;
-	else
-		return fibo(num - 1) + fibo(num - 2);
-}
-
 int main(void) {
 
-	int num;
-	int i;
+	int num[11] = { 0,1,2,4};
+	int t, n;
 
-	printf("\n피보나치 수 입력 : ");
-	scanf("%d", &num);
+	for (int i = 4; i < 11; i++)
+		num[i] = num[i - 1] + num[i - 2] + num[i - 3];
 
-	printf("%d\n", fibo(num));
+	for (scanf("%d", &t); t--;)
+	{
+		scanf("%d", &n);
+		printf("%d\n", num[n]);
+	}
 
 
 

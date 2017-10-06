@@ -1,34 +1,43 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
 #pragma warning(disable: 4996)
-void change(char pStr1[], char pStr2[], char pStr3[]);
 
-int main()
-{
-   char str1[31] = ""; // 문자열 최대길이 30
-   char str2[11] = ""; // 찾을 문자열 10자 이내
-   char str3[31] = ""; // 바꿀 문자열 10자 이내
+int minSum = 999999;
+int rgb[10001][3];
 
-   gets_s(str1);
-   gets_s(str2);
-   gets_s(str3);
+void compare(int num, int index, int sum) {
 
-   change(str1, str2, str3);
+	sum += rgb[num][index];
 
-   printf("%s\n", str1);
+	if (num == 0) {
+		if (sum < minSum)
+			minSum = sum;
 
-   return 0;
+		return;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (i != index)
+			compare(num - 1, i, sum);
+	}
 }
 
-void change(char pStr1[], char pStr2[], char pStr3[])
-{
-   int i;
+int main(void) {
+	int num;
+	scanf("%d", &num);
 
-   for (i = 0; i < strlen(pStr1); i++) {
-      if (memcmp(pStr1 + i, pStr2, strlen(pStr2)) == 0) {
-         strcat(pStr3, pStr1 + i + strlen(pStr2)); // 남은 문자열 복사
-         strcpy(pStr1 + i, pStr3);
-      }
-   }
+	for (int i = 0; i < num; i++) {
+		for (int j = 0; j < 3; j++) {
+			scanf("%d", &rgb[i][j]);
+		}
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		int sum = 0;
+		compare(num - 1, i, sum);
+	}
+
+	printf("%d\n", minSum);
+
+	return 0;
 }

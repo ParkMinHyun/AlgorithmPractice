@@ -1,33 +1,73 @@
 #include<stdio.h>
+#include<stdlib.h>
+
 #pragma warning(disable: 4996)
 
 int size = 0, sum = 0;
-int arr2[101] = { 0, };
-void search(int arr[][101], int from) {
-	// 1번 컴퓨터에서 연결 된 모든 컴퓨터 재귀로 검사 시작함. arr2는 중복피해서 불 필요한 검사 안하려고 생성 
-	for (int i = 2; i <= size; i++) {
-		if (arr[from][i] == 1 && arr2[i] != 1) {
-			sum++;
+int arr2[1001] = { 0, };
+int arr3[1001] = { 0, };
+int queue[1001] = { 0, };
+
+void DFS(int **arr, int start, int first) {
+
+	printf("%d ", start);
+	for (int i = 1; i <= size; i++) {
+		if (arr[start][i] == 1 && arr2[i] == 0) {
 			arr2[i] = 1;
-			search(arr, i);
+			DFS(arr, i, 0);
 		}
 	}
 }
 
-int main(void) {
-	int ganSun, from, to;
-	int arr[101][101] = { 0, };
-	scanf("%d", &size);
-	scanf("%d", &ganSun);
+void BFS(int **arr, int start) {
+	int front = 0, rear = 0, Pop, i;
 
-	while (ganSun--) {
+	printf("%d ", start);
+	queue[0] = start;
+	rear++;
+	arr3[start] = 1;
+
+	while (front<rear) {
+		Pop = queue[front];
+		front++;
+
+		for (i = 1; i <= size; i++) {
+			if (arr[Pop][i] == 1 && arr3[i] == 0) {
+				printf("%d ", i);
+				queue[rear] = i;
+				rear++;
+				arr3[i] = 1;
+			}
+		}
+	}
+
+	return;
+}
+
+int main(void) {
+	int edge, from, to, start;
+	int **arr;
+
+	scanf("%d %d %d", &size, &edge, &start);
+
+	arr = (int **)malloc(sizeof(int **)*(size + 1));
+	for (int i = 0; i <= size; i++) {
+		arr[i] = (int *)malloc(sizeof(int *)*(size + 1));
+	}
+
+	while (edge--) {
 		scanf("%d %d", &from, &to);
 		arr[to][from] = 1;
 		arr[from][to] = 1;
 	}
 
-	search(arr, 1);
+	arr2[start] = 1;
+	DFS(arr, start, 1);
+
+	printf("\n"); 
 	
-	printf("%d\n", sum);
+	arr3[start] = 1;
+	BFS(arr, start);
+
 	return 0;
 }

@@ -4,70 +4,49 @@
 #pragma warning(disable: 4996)
 
 int size = 0, sum = 0;
-int arr2[1001] = { 0, };
-int arr3[1001] = { 0, };
-int queue[1001] = { 0, };
+int arr[101][101] = { 0, };
+int number[101] = { 0, };
+int check[101] = { 0, };
+int queue[101] = { 0, };
 
-void DFS(int **arr, int start, int first) {
-
-	printf("%d ", start);
-	for (int i = 1; i <= size; i++) {
-		if (arr[start][i] == 1 && arr2[i] == 0) {
-			arr2[i] = 1;
-			DFS(arr, i, 0);
-		}
-	}
-}
-
-void BFS(int **arr, int start) {
+int BFS(int arr[][101], int start, int target) {
 	int front = 0, rear = 0, Pop, i;
 
-	printf("%d ", start);
 	queue[0] = start;
 	rear++;
-	arr3[start] = 1;
+	check[start] = 1;
 
-	while (front<rear) {
+	while (front < rear) {
 		Pop = queue[front];
 		front++;
 
 		for (i = 1; i <= size; i++) {
-			if (arr[Pop][i] == 1 && arr3[i] == 0) {
-				printf("%d ", i);
+			if (arr[Pop][i] == 1 && check[i] == 0) {
 				queue[rear] = i;
 				rear++;
-				arr3[i] = 1;
+				check[i] = 1;
+				number[i] = number[Pop] + 1;
+				if (target == i)
+					return number[i];
 			}
 		}
 	}
-
-	return;
+	return -1;
 }
 
 int main(void) {
-	int edge, from, to, start;
-	int **arr;
+	int edge, to, from, A, B;
 
-	scanf("%d %d %d", &size, &edge, &start);
-
-	arr = (int **)malloc(sizeof(int **)*(size + 1));
-	for (int i = 0; i <= size; i++) {
-		arr[i] = (int *)malloc(sizeof(int *)*(size + 1));
-	}
+	scanf("%d", &size);
+	scanf("%d %d", &A, &B);
+	scanf("%d", &edge);
 
 	while (edge--) {
-		scanf("%d %d", &from, &to);
+		scanf("%d %d", &to, &from);
 		arr[to][from] = 1;
 		arr[from][to] = 1;
 	}
 
-	arr2[start] = 1;
-	DFS(arr, start, 1);
-
-	printf("\n"); 
-	
-	arr3[start] = 1;
-	BFS(arr, start);
-
+	printf("%d\n",BFS(arr, A, B));
 	return 0;
 }

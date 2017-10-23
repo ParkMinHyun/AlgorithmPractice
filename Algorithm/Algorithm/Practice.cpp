@@ -1,52 +1,26 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<cstring>
 #pragma warning(disable: 4996)
 
-int size = 0, sum = 0;
-int arr[101][101] = { 0, };
-int number[101] = { 0, };
-int check[101] = { 0, };
-int queue[101] = { 0, };
-
-int BFS(int arr[][101], int start, int target) {
-	int front = 0, rear = 0, Pop, i;
-
-	queue[0] = start;
-	rear++;
-	check[start] = 1;
-
-	while (front < rear) {
-		Pop = queue[front];
-		front++;
-
-		for (i = 1; i <= size; i++) {
-			if (arr[Pop][i] == 1 && check[i] == 0) {
-				queue[rear] = i;
-				rear++;
-				check[i] = 1;
-				number[i] = number[Pop] + 1;
-				if (target == i)
-					return number[i];
-			}
-		}
-	}
-	return -1;
-}
-
 int main(void) {
-	int edge, to, from, A, B;
 
-	scanf("%d", &size);
-	scanf("%d %d", &A, &B);
-	scanf("%d", &edge);
+	char str1[101], str2[101];
+	char str3[101];
+	int sum = 0, sum2 = 0;
+	scanf("%s %s", str1, str2);
+	strcpy(str3, str1);
 
-	while (edge--) {
-		scanf("%d %d", &to, &from);
-		arr[to][from] = 1;
-		arr[from][to] = 1;
+	while (strstr(str1, str2) != NULL) {
+		sum++;
+		sprintf(str1, "%s", strstr(str1, str2)+strlen(str2));
 	}
 
-	printf("%d\n",BFS(arr, A, B));
+	while (strstr(str3, str2) != NULL) {
+		sum2++;
+		sprintf(str3, "%s", strstr(str3, str2) + 1);
+	}
+
+	printf("%d\n%d", sum,sum2);
 	return 0;
 }

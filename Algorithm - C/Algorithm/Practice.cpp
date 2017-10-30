@@ -1,33 +1,26 @@
 #include<stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include<stdlib.h>
+#include<cstring>
 #pragma warning(disable: 4996)
 
-int compare(const void *x, const void *y)
-{
-	char *a, *b;
-	a = (char *)x;
-	b = (char *)y;
+int main(void) {
 
-	if (strlen(a) > strlen(b)) return 1;
-	else if (strlen(a) < strlen(b)) return -1;
-	else return strcmp(a,b);
-}
+	char str1[101], str2[101];
+	char str3[101];
+	int sum = 0, sum2 = 0;
+	scanf("%s %s", str1, str2);
+	strcpy(str3, str1);
 
-int main() {
-	int num;
-	char str[20000][51];
-	scanf("%d", &num);
-	for (int i = 0; i < num; i++) {
-		scanf("%s", str[i]);
+	while (strstr(str1, str2) != NULL) {
+		sum++;
+		sprintf(str1, "%s", strstr(str1, str2) + strlen(str2));
 	}
 
-	qsort(str, num, sizeof(str[0]), compare);
-
-	for (int j = 0; j < num; j++) {
-		if (strcmp(str[j], str[j + 1])) {
-			printf("%s\n", str[j]);
-		}
+	while (strstr(str3, str2) != NULL) {
+		sum2++;
+		sprintf(str3, "%s", strstr(str3, str2) + 1);
 	}
+
+	printf("%d\n%d", sum, sum2);
 	return 0;
 }

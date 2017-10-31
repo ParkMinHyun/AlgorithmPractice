@@ -1,36 +1,33 @@
 #include <string>
 #include <cstdio>
+#include <list>
 #include <vector>
 #include <iostream>
 #include <algorithm>
-
+#include <queue>
 using namespace std;
-
-int N, M;
-vector<string> listen;
-vector<string> print;
 
 int main()
 {
-	int cnt = 0;
-	char arr[21];
-	cin >> N >> M;
-	for (int i = 0; i < N; ++i) {
-		cin >> arr;
-		listen.push_back(arr);
-	}
-	sort(listen.begin(), listen.end());
+	priority_queue<int> pq;
+	list<int> li;
+	int N, input;
+	cin >> N;
 
-	for (int i = 0; i < M; ++i) {
-		cin >> arr;
-		if (binary_search(listen.begin(), listen.end(), arr)) {
-			print.push_back(arr);
-			cnt++;
+	while (N--) {
+		cin >> input;
+
+		if (input == 0) {
+			if (pq.size() == 0)
+				cout << 0 << '\n';
+			else {
+				cout << -pq.top() << '\n';
+				pq.pop();
+				
+			}
+		}
+		else if (input > 0) {
+			pq.push(-input);
 		}
 	}
-
-	sort(print.begin(), print.end());
-	printf("%d\n", cnt);
-	for (int i = 0; i < print.size(); i++) 
-		printf("%s\n", print[i].c_str());
 }

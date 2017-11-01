@@ -1,3 +1,5 @@
 ﻿  Practice.cpp
+c:\users\parkminhyun\documents\algorithmpractice\algorithm - c++\algorithm\practice.cpp(9): warning C4477: 'scanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int'입니다.
+c:\users\parkminhyun\documents\algorithmpractice\algorithm - c++\algorithm\practice.cpp(9): warning C4477: 'scanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int'입니다.
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm - C++\x64\Debug\Algorithm.exe
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm - C++\x64\Debug\Algorithm.pdb (Partial PDB)

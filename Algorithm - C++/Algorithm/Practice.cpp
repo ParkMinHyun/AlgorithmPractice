@@ -1,23 +1,27 @@
 #include <stdio.h>
-#include <algorithm>
-#include <map>
-
+#include <iostream>
 using namespace std;
-#pragma warning(disable: 4996)
 
 int main(void) {
-	map<int,int> m;
-	int M, N,input;
+	int num=0, arr[1001], max = 0, subMax = 0;
+	int subSum[1001] = { 1 };
 
-	scanf("%d", &M);
-	while (M--) {
-		scanf("%d", &input);
-		m[input] = 1;
-	}
+	scanf("%d %d", num, arr[0]);
 
-	scanf("%d", &N);
-	while (N--) {
-		scanf("%d", &input);
-		printf("%d\n", (m[input] == 1) ? 1 : 0);
+	for (int i = 1; i < num; i++) {
+		cin >> arr[i];
+		subMax = 0;
+		subSum[i] = 1;
+
+		for (int j = 0; j < i; j++) {
+			if (arr[j] < arr[i] && subMax < subSum[j])
+			{
+				subMax = subSum[j];
+				subSum[i] = subMax + 1;
+			}
+		}
+		if (max < subSum[i])
+			max = subSum[i];
 	}
+	cout << max;
 }

@@ -1,51 +1,29 @@
-#include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
+#include <stdio.h>
+#pragma warning(disable : 4996)
 
-using namespace std;
+int main(void) {
+	int num, sum = 1;
+	int arr[10] = { 0 };
+	scanf("%d", &num);
 
-typedef struct _INFO_
-{
-	char name[11];
-	int kor;
-	int eng;
-	int math;
-}INFO;
+	do{
 
-INFO info[100001];
+		if (num % 10 == 6 && arr[9] < arr[6])
+			arr[9] ++;
+		else if (num % 10 == 9 && arr[6] < arr[9])
+			arr[6] ++;
+		else
+			arr[num % 10]++;
 
-bool comp(const INFO &a, const INFO &b)
-{
-	if (a.kor != b.kor)
-		return a.kor > b.kor;
+		num /= 10;
+	} while (num);
 
-	else if (a.kor == b.kor && a.eng == b.eng && a.math == b.math)
+	int max = 0;
+	for (int i = 0; i < 10; i++)
 	{
-		if (strcmp(a.name, b.name) < 0)
-			return true;
-		return false;
+		printf("%d = %d\n", i, arr[i]);
+		if (arr[i] > max)
+			max = arr[i];
 	}
-
-	else if (a.kor == b.kor && a.eng == b.eng)
-		return a.math > b.math;
-
-	else if (a.kor == b.kor)
-		return a.eng < b.eng;
+	printf("%d", max);
 }
-
-int main()
-{
-	int n;
-	cin >> n;
-	for (int i = 0; i < n; i++)
-		cin >> info[i].name >> info[i].kor >> info[i].eng >> info[i].math;
-
-	sort(info, info + n, comp);
-
-	for (int i = 0; i < n; i++)
-		printf("%s\n", info[i].name);
-
-	return 0;
-}
-

@@ -1,29 +1,21 @@
-#include <stdio.h>
-#pragma warning(disable : 4996)
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
 
 int main(void) {
-	int num, sum = 1;
-	int arr[10] = { 0 };
-	scanf("%d", &num);
+	int num, ave, max;
+	vector<int> arr(10, 0);
+	cin >> num;
 
-	do{
-
-		if (num % 10 == 6 && arr[9] < arr[6])
-			arr[9] ++;
-		else if (num % 10 == 9 && arr[6] < arr[9])
-			arr[6] ++;
-		else
-			arr[num % 10]++;
-
+	do {
+		arr[num % 10]++;
 		num /= 10;
 	} while (num);
 
-	int max = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		printf("%d = %d\n", i, arr[i]);
-		if (arr[i] > max)
-			max = arr[i];
-	}
-	printf("%d", max);
+	arr[6] = arr[9] = ((double)(arr[6] + arr[9]) / 2) + 0.5;
+	max = *max_element(arr.begin(), arr.end());
+
+	cout << max;
 }

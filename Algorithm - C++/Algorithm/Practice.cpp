@@ -1,21 +1,23 @@
-#include <iostream>
+#include <stdio.h>
 #include <algorithm>
-#include <vector>
+#include <map>
 
 using namespace std;
+#pragma warning(disable: 4996)
 
 int main(void) {
-	int num, ave, max;
-	vector<int> arr(10, 0);
-	cin >> num;
+	map<int,int> m;
+	int M, N,input;
 
-	do {
-		arr[num % 10]++;
-		num /= 10;
-	} while (num);
+	scanf("%d", &M);
+	while (M--) {
+		scanf("%d", &input);
+		m[input] = 1;
+	}
 
-	arr[6] = arr[9] = ((double)(arr[6] + arr[9]) / 2) + 0.5;
-	max = *max_element(arr.begin(), arr.end());
-
-	cout << max;
+	scanf("%d", &N);
+	while (N--) {
+		scanf("%d", &input);
+		printf("%d\n", (m[input] == 1) ? 1 : 0);
+	}
 }

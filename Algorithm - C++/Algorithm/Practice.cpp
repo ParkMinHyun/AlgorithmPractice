@@ -4,9 +4,9 @@ using namespace std;
 
 int main(void) {
 	string s;
-	int cnt = 0;
+	int sum = 0;
 	while (getline(cin, s, ',')) {
-		cnt++;
+		sum += stoi(s);
 	}
-	cout << cnt << endl;
+	cout << sum << endl;
 }

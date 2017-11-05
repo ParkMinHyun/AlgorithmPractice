@@ -1,9 +1,6 @@
 #include <iostream>
-#include <map>
 #include <list>
-#include <vector>
 #include <string>
-#include <math.h>
 using namespace std;
 
 int main(void) {
@@ -14,21 +11,28 @@ int main(void) {
 	list<string> cities;
 	
 	while (getline(cin, cityName, ',')) {
+		// 해당 도시 찾기
 		auto it = find(cities.begin(), cities.end(), cityName);
+		// 못 찾았을 경우, cache size가 0이 아니면 삭제 후 추가
 		if (it == cities.end()){
-			if (cities.size() >= cacheSize)
+			if (cities.size() >= cacheSize && cacheSize != 0)
 				cities.erase(--it);
 			time += 5;
 		}
+		// 찾았을 경우 해당 위치 지우고 새로 추가
 		else {
 			cities.erase(it);
 			time += 1;
 		}
-		cities.insert(cities.begin(), cityName);
-		cout << time << endl;
+		if(cacheSize != 0)
+			cities.insert(cities.begin(), cityName);
 	}
-	/*3
-	Jeju,Pangyo,Seoul,NewYork,LA,Jeju,Pangyo,Seoul,NewYork,LA*/
-	/*3
-	Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul*/
+	cout << time << '\n';
 }
+
+/*0
+Jeju,Pangyo,Seoul,NewYork,LA*/
+/*3
+Jeju,Pangyo,Seoul,NewYork,LA,Jeju,Pangyo,Seoul,NewYork,LA*/
+/*3
+Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul*/

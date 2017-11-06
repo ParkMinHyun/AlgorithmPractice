@@ -1,38 +1,52 @@
 #include <iostream>
-#include <list>
+#include <vector>
 #include <string>
+#include <algorithm>
 using namespace std;
 
-int main(void) {
-	int cacheSize,time=0;
-	string cityName;
+void zarCard(string str1, string str2) {
+	vector<string> vec1, vec2;
+	// 대문자 변환
+	transform(str1.begin(), str1.end(), str1.begin(), toupper);
+	transform(str2.begin(), str2.end(), str2.begin(), toupper);
 
-	scanf("%d ", &cacheSize);
-	list<string> cities;
-	
-	while (getline(cin, cityName, ',')) {
-		// 해당 도시 찾기
-		auto it = find(cities.begin(), cities.end(), cityName);
-		// 못 찾았을 경우, cache size가 0이 아니면 삭제 후 추가
-		if (it == cities.end()){
-			if (cities.size() >= cacheSize && cacheSize != 0)
-				cities.erase(--it);
-			time += 5;
-		}
-		// 찾았을 경우 해당 위치 지우고 새로 추가
-		else {
-			cities.erase(it);
-			time += 1;
-		}
-		if(cacheSize != 0)
-			cities.insert(cities.begin(), cityName);
+	// subSet 나누기
+	for (int i = 0; i < str1.length() - 1; i++)
+		if ((str1[i] >= 'A' && str1[i] <= 'Z') && (str1[i + 1] >= 'A' && str1[i + 1] <= 'Z'))
+			vec1.push_back(str1.substr(i, 2));
+
+	for (int i = 0; i < str2.length() - 1; i++)
+		if ((str2[i] >= 'A' && str2[i] <= 'Z') && (str2[i + 1] >= 'A' && str2[i + 1] <= 'Z'))
+			vec2.push_back(str2.substr(i, 2));
+
+	vector<string> unionSet, intersectionSet;
+	for (int i = 0; i < vec1.size(); i++) {
+		auto it = find(vec2.begin(), vec2.end(), vec1[i]);
+
+		// 찾았으면 vec1[i]는 교집합 셋으로
+		if (it != vec2.end())
+			intersectionSet.push_back(*it);
+
+		// 찾든 못 찾든 vec1[i]는 합집합 셋으로
+		unionSet.push_back(vec1[i]);
 	}
-	cout << time << '\n';
+	// 이전 For문은 Vec2에 대한 Find 검사 했으니 이번엔 Vec1에 대한 Find 검사
+	for (int i = 0; i < vec2.size(); i++) {
+		auto it = find(vec1.begin(), vec1.end(), vec2[i]);
+		int pos = it - vec1.begin();
+		if (it == vec1.end())
+			unionSet.push_back(vec2[i]);
+		else
+			vec1.erase(vec1.begin() + pos);
+	}
+
+	double zardCal = ((double)intersectionSet.size() / unionSet.size());
+	printf("%.0f\n", unionSet.size() == 0 ? 65536 : zardCal * 65536);
 }
 
-/*0
-Jeju,Pangyo,Seoul,NewYork,LA*/
-/*3
-Jeju,Pangyo,Seoul,NewYork,LA,Jeju,Pangyo,Seoul,NewYork,LA*/
-/*3
-Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul,Jeju,Pangyo,Seoul*/
+int main(void) {
+	zarCard("FRANCE", "french");
+	zarCard("handshake", "shake hands");
+	zarCard("aa1+aa2", "AAAA12");
+	zarCard("E=M*C^2", "e=m*c^2");
+}

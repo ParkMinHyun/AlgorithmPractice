@@ -4,49 +4,51 @@
 #include <algorithm>
 using namespace std;
 
-void zarCard(string str1, string str2) {
-	vector<string> vec1, vec2;
-	// 대문자 변환
-	transform(str1.begin(), str1.end(), str1.begin(), toupper);
-	transform(str2.begin(), str2.end(), str2.begin(), toupper);
+int check[7][7], sum, checkNum;
+char arr[7][7] = { { 'T','T', 'T', 'A', 'N', 'T' },{ 'R','R', 'F', 'A', 'C', 'C' },{ 'R','R', 'R', 'F', 'C', 'C' },
+{ 'T','R', 'R', 'R', 'A', 'A' },{ 'T','T', 'M', 'M', 'M', 'F' },{ 'T','M', 'M', 'T', 'T', 'J' } };
 
-	// subSet 나누기
-	for (int i = 0; i < str1.length() - 1; i++)
-		if ((str1[i] >= 'A' && str1[i] <= 'Z') && (str1[i + 1] >= 'A' && str1[i + 1] <= 'Z'))
-			vec1.push_back(str1.substr(i, 2));
+void friendsBlockGame(int w, int h) {
 
-	for (int i = 0; i < str2.length() - 1; i++)
-		if ((str2[i] >= 'A' && str2[i] <= 'Z') && (str2[i + 1] >= 'A' && str2[i + 1] <= 'Z'))
-			vec2.push_back(str2.substr(i, 2));
+	checkNum = 0;
 
-	vector<string> unionSet, intersectionSet;
-	for (int i = 0; i < vec1.size(); i++) {
-		auto it = find(vec2.begin(), vec2.end(), vec1[i]);
+	// check 초기화
+	for (int i = 0; i < h; i++)
+		for (int j = 0; j < w; j++)
+			check[i][j] = 0;
 
-		// 찾았으면 vec1[i]는 교집합 셋으로
-		if (it != vec2.end())
-			intersectionSet.push_back(*it);
+	for (int i = 0; i < h - 1; i++) {
+		for (int j = 0; j < w - 1; j++) {
+			if (arr[i][j] != 'Z' &&
+				arr[i][j] == arr[i][j + 1] &&
+				arr[i][j] == arr[i + 1][j] &&
+				arr[i][j] == arr[i + 1][j + 1]) {
 
-		// 찾든 못 찾든 vec1[i]는 합집합 셋으로
-		unionSet.push_back(vec1[i]);
-	}
-	// 이전 For문은 Vec2에 대한 Find 검사 했으니 이번엔 Vec1에 대한 Find 검사
-	for (int i = 0; i < vec2.size(); i++) {
-		auto it = find(vec1.begin(), vec1.end(), vec2[i]);
-		int pos = it - vec1.begin();
-		if (it == vec1.end())
-			unionSet.push_back(vec2[i]);
-		else
-			vec1.erase(vec1.begin() + pos);
+				check[i][j] = check[i][j + 1] = check[i + 1][j] = check[i + 1][j + 1] = 1;
+				checkNum++;
+			}
+		}
 	}
 
-	double zardCal = ((double)intersectionSet.size() / unionSet.size());
-	printf("%.0f\n", unionSet.size() == 0 ? 65536 : zardCal * 65536);
+	if (checkNum == 0)
+		return;
+
+	for (int i = 0; i < h; i++) {
+		for (int j = 0; j < w; j++) {
+			if (check[i][j] == 1) {
+				sum++;
+
+				for (int k = i; k > 0; k--) {
+					arr[k][j] = arr[k - 1][j];
+					arr[k - 1][j] = 'Z';
+				}
+			}
+		}
+	}
+
+	friendsBlockGame(w, h);
 }
-
 int main(void) {
-	zarCard("FRANCE", "french");
-	zarCard("handshake", "shake hands");
-	zarCard("aa1+aa2", "AAAA12");
-	zarCard("E=M*C^2", "e=m*c^2");
+	friendsBlockGame(6, 6);
+	cout << sum << '\n';
 }

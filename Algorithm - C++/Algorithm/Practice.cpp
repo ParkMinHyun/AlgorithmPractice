@@ -1,24 +1,29 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <tuple>
 #include <algorithm>
 using namespace std;
+
+struct Person {
+	string name;
+	int kor, eng, math;
+};
+bool cmp(const Person &u, const Person &v) {
+	return make_tuple(-u.kor, u.eng, -u.math, u.name)
+		< make_tuple(-v.kor, v.eng, -v.math, v.name);
+}
 int main(void) {
-	int N, M;
-	int i, j;
-	cin >> N >> M;
-	vector<int> d;
-	for (int i = 1; i <= N; i++) {
-		d.push_back(i);
-	}
+	int n;
+	cin >> n;
 
-	while (M--) {
-		cin >> i >> j;
-		swap((d.begin()+(i-1)), (d.begin() + (j - 1)));
-	}
+	vector<Person> a(n);
+	for (int i = 0; i < n; i++)
+		cin >> a[i].name >> a[i].kor >> a[i].eng >> a[i].math;
 
-	for (int x : d) {
-		cout << x << ' ';
+	sort(a.begin(), a.end(), cmp);
+
+	for (Person x : a) {
+		cout << x.name << ' ' << '\n';
 	}
-	cout << '\n';
 }

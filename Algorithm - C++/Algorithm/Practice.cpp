@@ -1,30 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <tuple>
 #include <algorithm>
+#include <iostream>
 using namespace std;
-
-struct Person {
-	string name;
-	int age;
-};
-bool cmp(const Person &u, const Person &v) {
-	return (u.age) < (v.age);
-}
-
-int main(void) {
-	int n;
-	cin >> n;
-
-	vector<Person> a(n);
-	for (int i = 0; i < n; i++){
-		cin >> a[i].age >> a[i].name;
-	}
-
-	stable_sort(a.begin(), a.end(), cmp);
-
-	for (Person x : a) {
-		cout <<  x.age << ' ' <<  x.name << '\n';
-	}
+int main() {
+	int a, b, c;
+	cin >> a >> b >> c;
+	auto p = minmax({ a, b, c });
+	cout << (a + b + c) - p.first - p.second << '\n';
+	return 0;
 }

@@ -1,3 +1,5 @@
 ﻿  Practice.cpp
+c:\users\parkminhyun\documents\algorithmpractice\algorithm - c++\algorithm\practice.cpp(8): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+c:\users\parkminhyun\documents\algorithmpractice\algorithm - c++\algorithm\practice.cpp(8): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm - C++\x64\Debug\Algorithm.exe
   Algorithm.vcxproj -> C:\Users\ParkMinHyun\Documents\AlgorithmPractice\Algorithm - C++\x64\Debug\Algorithm.pdb (Partial PDB)

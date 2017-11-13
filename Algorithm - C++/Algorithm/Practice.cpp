@@ -7,23 +7,24 @@ using namespace std;
 
 struct Person {
 	string name;
-	int kor, eng, math;
+	int age,order;
 };
 bool cmp(const Person &u, const Person &v) {
-	return make_tuple(-u.kor, u.eng, -u.math, u.name)
-		< make_tuple(-v.kor, v.eng, -v.math, v.name);
+	return make_pair(u.age, u.order) < make_pair(v.age, v.order);
 }
 int main(void) {
 	int n;
 	cin >> n;
 
 	vector<Person> a(n);
-	for (int i = 0; i < n; i++)
-		cin >> a[i].name >> a[i].kor >> a[i].eng >> a[i].math;
+	for (int i = 0; i < n; i++){
+		cin >> a[i].age >> a[i].name;
+		a[i].order = i;
+	}
 
 	sort(a.begin(), a.end(), cmp);
 
 	for (Person x : a) {
-		cout << x.name << ' ' << '\n';
+		cout <<  x.age << ' ' <<  x.name << '\n';
 	}
 }

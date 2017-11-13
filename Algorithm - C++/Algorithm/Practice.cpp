@@ -5,16 +5,16 @@
 using namespace std;
 int main(void) {
 	int N, M;
-	int a, b;
+	int i, j, k;
 	cin >> N >> M;
 	vector<int> d;
-	for(int i=1; i<=N;i++) {
+	for (int i = 1; i <= N; i++) {
 		d.push_back(i);
 	}
 
 	while (M--) {
-		cin >> a >> b;
-		reverse(d.begin() + (a - 1), d.begin() + (b));
+		cin >> i >> j >> k;
+		rotate(d.begin() + (i - 1), d.begin() + (k - 1), d.begin() + j);
 	}
 
 	for (int x : d) {

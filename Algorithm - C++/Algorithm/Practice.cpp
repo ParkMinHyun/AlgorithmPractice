@@ -5,7 +5,7 @@
 using namespace std;
 int main(void) {
 	int N, M;
-	int i, j, k;
+	int i, j;
 	cin >> N >> M;
 	vector<int> d;
 	for (int i = 1; i <= N; i++) {
@@ -13,8 +13,8 @@ int main(void) {
 	}
 
 	while (M--) {
-		cin >> i >> j >> k;
-		rotate(d.begin() + (i - 1), d.begin() + (k - 1), d.begin() + j);
+		cin >> i >> j;
+		swap((d.begin()+(i-1)), (d.begin() + (j - 1)));
 	}
 
 	for (int x : d) {

@@ -3,29 +3,15 @@
 #include <iostream>
 using namespace std;
 int main() {
-	int N;
-	cin >> N;
 
-	vector<int> a;
-	for (int i = 0; i < N; i++) {
-		int input;
-		cin >> input;
-		a.push_back(input);
+	vector<int> a = { 1, 3, 4, 5, 7, 7, 8 };
+	int max = *max_element(a.begin(), a.end());
+	for(int i=1; i<=max; i++){
+		auto one = equal_range(a.begin(), a.end(), i).first;
+		auto two = equal_range(a.begin(), a.end(), i).second;
+		cout << two - one << '\n';
+
+		cout << count(a.begin(),a.end(),i) << '\n';
+		cout << "==========================\n";
 	}
-
-	int maxSum = 0;
-	sort(a.begin(), a.end());
-	do {
-		int sum = 0;
-		for (int i = 0; i < N - 1; i++)
-		{
-			sum += abs(a[i] - a[i + 1]);
-		}
-		if (maxSum < sum)
-			maxSum = sum;
-
-	} while (next_permutation(a.begin(), a.end()));
-
-
-	cout << maxSum << '\n';
 }

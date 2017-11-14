@@ -1,30 +1,31 @@
 #include <iostream>
+#include <string>
 #include <vector>
-#include <bitset>
+
 using namespace std;
+
 int main() {
-	int n, input;
-	cin >> n;
+	int d=0;
+	int n, m;
+	int sum = 0;
+	cin >> n >> m;
 
-	// bitset 배열 생성 및 입력
-	vector<bitset<16>> arr1, arr2;
-	for (int i = 0; i < n; i++) {
-		cin >> input;
-		arr1.push_back(input);
-	}
-	for (int i = 0; i < n; i++) {
-		cin >> input;
-		arr2.push_back(input);
-	}
+	for (int i = n; i <= m; i++) {
+		string a = to_string(i);
 
-	for (int i = 0; i < n; i++) {
-		for (int j = n - 1; j >= 0; j--) {
-			// or 비트 연산자 
-			if (arr1[i].test(j) | arr2[i].test(j))
-				cout << "#";
-			else
-				cout << " ";
+		int size = a.size();
+		int sum = 0;
+		for (int j = 0; j < size/2; j++) {
+			if (a[j] == a[size - j - 1])
+			{
+				sum++;
+			}
 		}
-		cout << '\n';
+
+		if (sum == size / 2)
+			d++;
 	}
+	cout<< d<< endl;
+
+	return 0;
 }

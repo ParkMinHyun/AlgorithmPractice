@@ -1,31 +1,27 @@
 #include <iostream>
-#include <string>
 #include <vector>
+#include <queue>
+#include <limits.h>
+#include <cstdio>
 
 using namespace std;
 
-int main() {
-	int d=0;
-	int n, m;
-	int sum = 0;
-	cin >> n >> m;
+double fibo[2000];
 
-	for (int i = n; i <= m; i++) {
-		string a = to_string(i);
+int main()
+{
+	fibo[0] = 1;
+	fibo[1] = 1;
 
-		int size = a.size();
-		int sum = 0;
-		for (int j = 0; j < size/2; j++) {
-			if (a[j] == a[size - j - 1])
-			{
-				sum++;
-			}
-		}
+	int num;
+	cin >> num;
 
-		if (sum == size / 2)
-			d++;
+	for (int i = 0; i < num; i++) {
+		fibo[i + 2] = fibo[i + 1] + fibo[i];
 	}
-	cout<< d<< endl;
 
-	return 0;
+	for (int i = 0; i < num; i++) {
+		cout << fibo[i] << endl;
+	}
 }
+

@@ -1,86 +1,59 @@
 #include <iostream>
-#include <sstream>
 #include <vector>
+#include <string>
 
+#define MAXNUM 255
 using namespace std;
 
-/*
-* Description :
-* Time complexity: O(N^2)
-* Space complexity: O(N^2)
-*/
-int isEnableDrive(const vector<int> &E, const vector<int> &C) {
+bool selectWeight(const int data[][2], int result[], int N, int W) {
 
+	int num=0;
 	bool flag = false;
-	int charge = 0, index = 0;
-	int remainSave = 0, tempRemainSave;
-
-	for (int x : C)
-		remainSave += x;
-
-
-	for (int index = 0; index < E.size(); index++) {
-
-		charge = 0;
-		tempRemainSave = remainSave;
-		for (int i = 0; i < index; i++)
-			tempRemainSave -= E[i];
-
-		for (int start = index; start < E.size(); start++) {
-			charge += E[start];
-
-			if (charge > tempRemainSave)
-				return start;
-
-			charge -= C[start];
-			tempRemainSave -= C[start];
-
-			if (charge < 0)
-				break;
+	for (int i = N-1; i >= 0 ; i--) {
+		for (int j = 0; j < data[i][1]; j++) {
+			if (W >= data[i][0] && W - data[i][0] >= 0) {
+				W -= data[i][0];
+				result[i] ++;
+				flag = true;
+			}
 		}
 	}
 
-	return -1;
-	/*for (int x : C)
-		remainSave += x;
+	if (flag == true)
+	{
+		if (W != 0)
+			return false;
 
-	for (int index = 0; index < E.size(); index++) {
-		charge = 0;
-		tempRemainSave = remainSave;
-		for (int start = index; start < E.size(); start++) {
-			charge += E[start];
-
-			if (charge > tempRemainSave)
-				return start;
-
-			charge -= C[start];
-			tempRemainSave -= C[start];
-		}
-		if (charge < 0)
-			flag = true;
-	}*/
+		return true;
+	}
+	return false;
 }
 
 int main(int argc, const char *argv[]) {
-	int T = 0, N = 0;
+	int TC, W, N;
+	cin >> TC;
 
-	cin >> T;
-	for (int i = 0; i < T; i++) {
-		vector<int> E, C;
+	for (int tc = 1; tc <= TC; ++tc) {
+		cin >> W;
 		cin >> N;
 
-		for (int i = 0; i < N; i++) {
-			int energy = 0;
-			cin >> energy;
-			E.push_back(energy);
+		int data[MAXNUM][2];
+		int result[MAXNUM];
+
+		for (int i = 0; i < N; ++i) {
+			cin >> data[i][0] >> data[i][1];
+			result[i] = 0;
 		}
 
-		for (int i = 0; i < N; i++) {
-			int cost = 0;
-			cin >> cost;
-			C.push_back(cost);
+		cout << "#" << tc << endl;
+		if (!selectWeight(data, result, N, W)) {
+			cout << "FAIL" << endl;
 		}
-
-		cout << isEnableDrive(E, C) << endl;
+		else {
+			for (int i = 0; i < N; ++i) {
+				cout << data[i][0] << " " << result[i] << endl;
+			}
+		}
 	}
+	return 0;
 }

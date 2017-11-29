@@ -1,43 +1,16 @@
-#include <iostream>
-#include <string>
-#include <stack>
-#include <vector>
-using namespace std;
+#include <stdio.h>
+#include <string.h>
 
-class Queue {
-public:
-	stack<int> st1;
-	stack<int> st2;
+int main() {
 
-	void enqueue(int v) {
-		st1.push(v);
-	}
+	char a[100];
+	int sum = 0 ;
 
-	int dequeue() {
-		if (st2.empty()) {
-			while (!st1.empty()) {
-				st2.push(st1.top());
-				st1.pop();
-			}
-		}
-		return st2.top();
-	}
-};
+	scanf("%s", a);
+	int len = strlen(a);
 
-int main(int argc, const char *argv[]) {
-	Queue queue;
-	string command;
-	int count, value;
-	cin >> count;
-	for (int i = 0; i < count; ++i) {
-		cin >> command;
-		if (command == "ENQUEUE") {
-			cin >> value;
-			queue.enqueue(value);
-		}
-		else if (command == "DEQUEUE") {
-			cout << queue.dequeue() << endl;
-			queue.st2.pop();
-		}
-	}
+	for (int i = 0; i < len; i++) 
+		sum = sum * 10 + (a[i] - '0');
+	
+	printf("%d", sum);
 }

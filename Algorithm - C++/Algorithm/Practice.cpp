@@ -1,16 +1,20 @@
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
 
+using namespace std;
 int main() {
 
-	char a[100];
-	int sum = 0 ;
+	int a;
+	char b[100];
 
-	scanf("%s", a);
-	int len = strlen(a);
+	cin >> a;
 
-	for (int i = 0; i < len; i++) 
-		sum = sum * 10 + (a[i] - '0');
-	
-	printf("%d", sum);
+	int index = 0;
+	while (a) {
+		b[index++] = a % 10 + '0';
+
+		a /= 10;
+	}
+	printf("%s", b);
 }

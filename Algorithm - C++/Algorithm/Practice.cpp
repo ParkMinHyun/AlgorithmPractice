@@ -1,44 +1,33 @@
-#include <stdio.h>
-#include <string.h>
+#include <string>
 #include <iostream>
 
 using namespace std;
-void quickSort(int arr[], int originLeft, int originRight) {
-	
-	int pivot;
-	for (int i = 0; i < 10; i++) {
-		pivot = i;
-		for (int j = i+1; j < 10; j++) {
-			if (arr[pivot] < arr[j])
-			{
-				pivot = j;
-			}
-		}
 
-		int temp = arr[pivot];
-		arr[pivot] = arr[i];
-		arr[i] = temp;
+void checkStr(string str)
+{
+	int alphabet[28] = { 0 };
+
+	int len = str.size();
+	for (int i = 0; i < len; i++) {
+		if (str[i] >= 'a' && str[i] <= 'z') {
+			alphabet[str[i] - 'a']++;
+		}
 	}
 
+	for (int i = 0; i < 28; i++) {
+		if (alphabet[i] != 0)
+		{
+			printf("%c%d", i + 97, alphabet[i]);
+		}
+	}
 
 }
-
 int main() {
 
-	int arr[10] = { 10,1,1,16,9,55,2,5,22,7 };
+	string str;
 
+	cin >> str;
 
-	for (int i = 0; i < 10; i++) {
-		printf("%d ", arr[i]);
-	}
-
-	cout << endl;
-
-	quickSort(arr, 0, 9);
-
-	for (int i = 0; i < 10; i++) {
-		printf("%d ", arr[i]);
-	}
-
+	checkStr(str);
 
 }

@@ -1,26 +1,36 @@
 #include <string>
 #include <iostream>
-
+#include <stack>
 using namespace std;
 
-void checkStr(string str)
+bool checkStr(string str)
 {
-	int alphabet[28] = { 0 };
-
+	stack<char> checkStack;
 	int len = str.size();
+
 	for (int i = 0; i < len; i++) {
-		if (str[i] >= 'a' && str[i] <= 'z') {
-			alphabet[str[i] - 'a']++;
-		}
-	}
-
-	for (int i = 0; i < 28; i++) {
-		if (alphabet[i] != 0)
+		if (str[i] == '{' || str[i] == '(' || str[i] == '[')
 		{
-			printf("%c%d", i + 97, alphabet[i]);
+			checkStack.push(str[i]);
+		}
+
+		else if (str[i] == '}' || str[i] == ')' || str[i] == ']')
+		{
+			if (checkStack.empty())
+				return 0;
+
+			if ( (checkStack.top() == '{' && str[i] == '}') 
+				|| (checkStack.top() == '(' && str[i] == ')')
+				|| (checkStack.top() == '[' && str[i] == ']'))
+				
+				checkStack.pop();
 		}
 	}
 
+	if (!checkStack.empty())
+		return 0;
+	else
+		return 1;
 }
 int main() {
 
@@ -28,6 +38,9 @@ int main() {
 
 	cin >> str;
 
-	checkStr(str);
+	if (checkStr(str) == 1)
+		cout << "컴파일 성공!";
+	else
+		cout << "실패";
 
 }

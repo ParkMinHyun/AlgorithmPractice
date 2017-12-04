@@ -3,44 +3,48 @@
 #include <stack>
 using namespace std;
 
-bool checkStr(string str)
+void quickSort(int num[], int originLeft, int originRight)
 {
-	stack<char> checkStack;
-	int len = str.size();
+	int left = originLeft;
+	int right = originRight;
+	int pivot = num[(left + right) / 2];
+	int temp;
 
-	for (int i = 0; i < len; i++) {
-		if (str[i] == '{' || str[i] == '(' || str[i] == '[')
-		{
-			checkStack.push(str[i]);
-		}
+	while (left <= right) {
+		while (num[left] < pivot)
+			left++;
 
-		else if (str[i] == '}' || str[i] == ')' || str[i] == ']')
-		{
-			if (checkStack.empty())
-				return 0;
+		while (num[right] > pivot)
+			right--;
 
-			if ( (checkStack.top() == '{' && str[i] == '}') 
-				|| (checkStack.top() == '(' && str[i] == ')')
-				|| (checkStack.top() == '[' && str[i] == ']'))
-				
-				checkStack.pop();
+		if (left <= right) {
+			temp = num[left];
+			num[left] = num[right];
+			num[right] = temp;
+
+			left++;
+			right--;
 		}
 	}
 
-	if (!checkStack.empty())
-		return 0;
-	else
-		return 1;
+	if (left < originRight)
+		quickSort(num, left, originRight);
+
+	if (right > originLeft)
+		quickSort(num, originLeft, right);
+
 }
 int main() {
 
-	string str;
+	int arr[10] = { 11, 1, 3,40,123,40,12,3,55,1 };
 
-	cin >> str;
+	for (int num : arr)
+		cout << num << ' ';
 
-	if (checkStr(str) == 1)
-		cout << "컴파일 성공!";
-	else
-		cout << "실패";
+	quickSort(arr, 0, 9);
+
+	cout << endl;
+	for (int num : arr)
+		cout << num << ' ';
 
 }

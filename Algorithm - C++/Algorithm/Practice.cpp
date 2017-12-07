@@ -1,25 +1,21 @@
-#include <stdlib.h>
-#include <malloc.h>
-#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void printWithoutOverlapNum(int num[], int size)
-{
-	int checkNum[1000] = { 0 };
+int main(void) {
 
-	for (int i = 0; i < size; i++)
-	{
-		checkNum[num[i]] ++;
-		if (checkNum[num[i]] <= 1)
-			printf("%d ", num[i]);
+	int num = 0;
+
+	for (int i = 2; i < 100; i++) {
+		int cnt = 0;
+		for(int j = 2; j <= i; j++) {
+
+			if (i % j == 0)
+			{
+				cnt++;
+			}
+		}
+		if (cnt == 1)
+			printf("%d ", i);
 	}
-	printf("\n");
-}
-
-int main() {
-
-	int arr[10] = { 11, 1, 3,40,123,40,12,3,55,1 };
-
-	printWithoutOverlapNum(arr, 10);
 
 }

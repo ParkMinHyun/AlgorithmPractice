@@ -34,6 +34,18 @@ void quickSort(int num[], int originLeft, int originRight)
 		quickSort(num, originLeft, right);
 
 }
+
+
+void printWithoutOverlapNum(int num[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (num[i] != num[i + 1])
+			cout << num[i] << ' ';
+	}
+	cout << endl;
+}
+
 int main() {
 
 	int arr[10] = { 11, 1, 3,40,123,40,12,3,55,1 };
@@ -42,9 +54,7 @@ int main() {
 		cout << num << ' ';
 
 	quickSort(arr, 0, 9);
-
 	cout << endl;
-	for (int num : arr)
-		cout << num << ' ';
+	printWithoutOverlapNum(arr, 10);
 
 }

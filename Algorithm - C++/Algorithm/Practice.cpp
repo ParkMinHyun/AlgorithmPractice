@@ -1,32 +1,20 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-int main(void) {
+int main() {
 
+	int num = 0;
+	int binary[30];
 
-	int *arr;
-	int size = 1000;
-	arr = (int *)malloc(sizeof(int) * size);
+	int index = 0;
+	scanf("%d", &num);
 
-	// 입력받은 수 만큼 배열에 모두 초기화 해둔다
-	for (int i = 2; i <= size; i++) {
-		arr[i] = i;
+	while (num) {
+		binary[index ++] = num % 2;
+		num /= 2;
 	}
 
-	for (int i = 2; i <= size; i++) {
-		for (int j = 2; j <= size; j++) {
+	for (int i = index - 1; i >= 0; i--)
+		printf("%d",binary[i]);
 
-			// 자신과 같지않고 0으로 떨어지면 소수아님
-			if (arr[j] != i && arr[j] % i == 0) {  
-				arr[j] = 0;
-			}
-		}
-	}
-
-	for (int i = 2; i <= size; i++) {
-		if (arr[i] != 0)
-			printf("%d ", arr[i]);
-	}
-
-	free(arr);
+	printf("\n");
 }

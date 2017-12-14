@@ -1,38 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+char *strCpy(char *dest, const char *src);
 
-int width, height;
-void find(int **path, int h, int w) {
+void main() {
+	char string[100];
 
-	if (h == height)
-		return;
+	strcpy(string, "문자열 복사함수");
+	puts(string);
 
-	if (w == width)
-		return;
-
-	path[h][w] = path[h - 1][w] + path[h][w - 1];
-
-	find(path, h + 1, w);
-	find(path, h, w + 1);
+	strCpy(string, "change String");
+	puts(string);
 }
 
-int main() {
+char *strCpy(char *originString, const char *changeString) {
 
-	int **path;
+	while (*changeString) {
+		// 차례대로 대입시키기
+		*originString++ = *changeString++;
+	}
 
-	scanf("%d %d", &height, &width);
+	// 끝 문자열 정리하기
+	*originString = '\0';
 
-	path = (int **)malloc(sizeof(int)*height);
-	for (int i = 0; i < height; i++)
-		path[i] = (int *)malloc(sizeof(int)*width);
-
-	for (int i = 0; i < height; i++)
-		path[i][0] = 1;
-
-	for (int j = 0; j < width; j++)
-		path[0][j] = 1;
-
-	find(path, 1, 1);
-	printf("%dX%d 크기의 가능한 경로 수는: %d\n", width, height, path[height-1][width-1]);
+	return originString;
 }

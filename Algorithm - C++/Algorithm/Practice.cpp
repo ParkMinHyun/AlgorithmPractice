@@ -1,28 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <vector>
+#include <set>
 
-char *strCpy(char *dest, const char *src);
+using namespace std;
 
 void main() {
-	char string[100];
-
-	strcpy(string, "문자열 복사함수");
-	puts(string);
-
-	strCpy(string, "change String");
-	puts(string);
-}
-
-char *strCpy(char *originString, const char *changeString) {
-
-	while (*changeString) {
-		// 차례대로 대입시키기
-		*originString++ = *changeString++;
+	int num;
+	float sum = 0.0;
+	cin >> num;
+	for (int i = 0; i < num; i++) {
+		int temp;
+		cin >> temp;
+		sum += temp;
 	}
 
-	// 끝 문자열 정리하기
-	*originString = '\0';
+	int inputNum = num;
+	while (1) {
+		if (sum / num >= 9.5)
+			break;
 
-	return originString;
+		sum += 10;
+		num++;
+	}
+
+	cout << num - inputNum << endl;
 }

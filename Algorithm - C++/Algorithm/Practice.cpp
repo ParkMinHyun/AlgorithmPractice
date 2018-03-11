@@ -5,23 +5,14 @@
 using namespace std;
 
 void main() {
-	int num;
-	float sum = 0.0;
-	cin >> num;
-	for (int i = 0; i < num; i++) {
-		int temp;
-		cin >> temp;
-		sum += temp;
+
+	int size;
+	cin >> size;
+
+	int sum = 0;
+	for (int i = 1; i <= size; i++) {
+		if (size % i == 0)
+			sum++;
 	}
-
-	int inputNum = num;
-	while (1) {
-		if (sum / num >= 9.5)
-			break;
-
-		sum += 10;
-		num++;
-	}
-
-	cout << num - inputNum << endl;
+	cout << sum;
 }
